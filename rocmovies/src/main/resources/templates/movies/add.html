@@ -55,7 +55,7 @@
                                 <select id="style" name="style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                                     <option selected="true" disabled="disabled" value="">Styles disponibles</option>
                                     <div th:each="style : ${styles}">
-                                        <option th:text="${style.name}" th:value="${style.name}"></option>
+                                        <option th:text="${style.getLabel()}" th:value="${style.getId()}"></option>
                                     </div>
                                 </select>
                         
@@ -67,7 +67,15 @@
                         
                                 <label for="imageSrc" class="block text-gray-300 text-lg mt-4 mb-2">URL de l'Image</label>
                                 <input type="text" id="imageSrc" name="imageSrc" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
-                        
+
+                                <label for="productor" class="block text-gray-300 text-lg mt-4 mb-2">Choisissez un producteur</label>
+                                <select id="productor" name="productor" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                    <option selected="true" disabled="disabled" value="">Producteurs disponibles</option>
+                                    <div th:each="productor : ${productors}">
+                                        <option th:text="${productor.getName()}" th:value="${productor.getId()}"></option>
+                                    </div>
+                                </select>
+
                                 <!-- Bouton de soumission -->
                                 <button type="submit" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all mt-6">
                                     Ajouter le Film

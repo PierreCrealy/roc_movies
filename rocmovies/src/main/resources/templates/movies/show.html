@@ -38,18 +38,18 @@
             
                     <!-- Card Image -->
                     <div class="w-full lg:w-1/2">
-                        <img th:src="${movie.imageSrc}" alt="Film 2" class="w-full h-96 object-cover">
+                        <img th:src="${movie.getImageSrc()}" alt="Film 2" class="w-full h-96 object-cover">
                     </div>
             
                     <!-- Film Information -->
                     <div class="w-full lg:w-1/2 p-6">
                         <h3 th:text="${movie.getTitle()}" class="text-2xl font-bold text-yellow-400 mb-4">Titre du Film</h3>
-                        <p th:text="${movie.style}" class="text-lg text-gray-300 mb-6">Genre: Action</p>
+                        <p th:text="${movie.getStyle().getLabel()}" class="text-lg text-gray-300 mb-6">Genre: Action</p>
                         
                         <p class="text-gray-400 mb-6">Petite description du film.</p>
                         
                         <p class="text-gray-400 mb-4"><strong>Durée:</strong> 120 minutes</p>
-                        <p class="text-gray-400 mb-6"><strong>Réalisateur:</strong> John Doe</p>
+                        <p class="text-gray-400 mb-6"><strong>Producteur :</strong> <span th:text="${movie.getProductor().getName()}"></span></p>
             
                         <a href="#" class="w-full py-3 bg-yellow-500 text-black rounded-full text-lg font-semibold hover:bg-yellow-400 transition-all">
                             Réserver

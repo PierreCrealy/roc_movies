@@ -18,8 +18,9 @@ public class Movie {
     private String title;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private MovieStyles style;
+    @OneToOne
+    @JoinColumn(name = "style_id", referencedColumnName = "id")
+    private MovieStyle style;
 
     @NotNull
     private Integer productionYear;
@@ -38,43 +39,37 @@ public class Movie {
     public Movie() {
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public MovieStyles getStyle() {
+    public MovieStyle getStyle() {
         return style;
     }
-
-    public void setStyle(MovieStyles style) {
+    public void setStyle(MovieStyle style) {
         this.style = style;
     }
 
     public int getProductionYear() {
         return productionYear;
     }
-
     public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
-    }
-
-    public int getid() {
-        return id;
-    }
-
-    public void setid(int id) {
-        this.id = id;
     }
 
     public String getRef() {
         return ref;
     }
-
     public void setRef(String ref) {
         this.ref = ref;
     }
@@ -82,10 +77,17 @@ public class Movie {
     public String getImageSrc() {
         return imageSrc;
     }
-
     public void setImageSrc(String imageSrc) {
         this.imageSrc = imageSrc;
     }
+
+    public Productor getProductor() {
+        return productor;
+    }
+    public void setProductor(Productor productor) {
+        this.productor = productor;
+    }
+
 
     @Override
     public String toString() {

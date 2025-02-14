@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.ndroc.rocmovies.entities.MovieStyle;
 import com.ndroc.rocmovies.interfaces.MovieRepository;
+import com.ndroc.rocmovies.interfaces.MovieStyleRepository;
+import com.ndroc.rocmovies.interfaces.ProductorRepository;
 import com.ndroc.rocmovies.services.MovieServiceManual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,31 +32,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MovieController {
 
     private final MovieRepository movieRepository;
+    private final MovieStyleRepository movieStyleRepository;
+    private final ProductorRepository productorRepository;
 
-    public MovieController(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
-
-    @GetMapping("/manual")
-    public String getListMoviesManual(Model model){
-
-        MovieServiceManual movieRepositoryMano = new MovieServiceManual();
-        model.addAttribute("moviesTitle", movieRepositoryMano.getAllMovies());
-
-        return "movies/list-manual";
+    public MovieController(MovieRepository movieRepository, MovieStyleRepository movieStyleRepository, ProductorRepository productorRepository) {
+        this.movieRepository      = movieRepository;
+        this.movieStyleRepository = movieStyleRepository;
+        this.productorRepository  = productorRepository;
     }
 
     @GetMapping()
-    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyles> movieStyle, Model model) {
+    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyle> movieStyle, Model model) {
 
-        List<MovieStyles> styles = Arrays.asList(MovieStyles.class.getEnumConstants());
+        Iterable<Movie> movies = movieRepository.findAll();
 
-//        if(movieStyle.isPresent()){
-//
-//        }
+        if(movieStyle.isPresent()){
+            movies = movieRepository.findMoviesByStyle(movieStyle.get());
+        }
 
-        model.addAttribute("movies", movieRepository.findAll());
-        model.addAttribute("styles", styles);
+        model.addAttribute("movies", movies);
+        model.addAttribute("styles", movieStyleRepository.findAll());
 
         return "movies/list";
     }
@@ -72,8 +70,8 @@ public class MovieController {
     @GetMapping("/adding")
     public String addMovie(Model model) {
 
-        List<MovieStyles> styles = Arrays.asList(MovieStyles.class.getEnumConstants());
-        model.addAttribute("styles", styles);
+        model.addAttribute("styles", movieStyleRepository.findAll());
+        model.addAttribute("productors", productorRepository.findAll());
 
         return "movies/add";
     }
@@ -92,8 +90,6 @@ public class MovieController {
         movieRepository.save(movie);
 
         return "redirect:/movie";
-
-       //return this.getListMovies(java.util.Optional.empty(), model);
     }
     
     

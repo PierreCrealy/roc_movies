@@ -1,12 +1,17 @@
 package com.ndroc.rocmovies.interfaces;
 
 import com.ndroc.rocmovies.entities.Movie;
-import org.springframework.data.repository.CrudRepository;
+import com.ndroc.rocmovies.entities.MovieStyle;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Repository
-public interface MovieRepository extends CrudRepository<Movie, Integer> {
+public interface MovieRepository extends JpaRepository<Movie, Integer> {
+
+    List<Movie> findMoviesByStyle(@NotNull MovieStyle style);
     //    @RestResource(path = "search-by-name" )
     //    Iterable<Option> findByNameContaining(@Param("val") String name);
     //

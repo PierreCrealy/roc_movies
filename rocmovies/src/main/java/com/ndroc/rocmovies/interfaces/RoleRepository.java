@@ -1,9 +1,9 @@
 package com.ndroc.rocmovies.interfaces;
 
-import com.ndroc.rocmovies.entities.MovieStyle;
+import com.ndroc.rocmovies.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieStyleRepository extends JpaRepository<MovieStyle, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 }
