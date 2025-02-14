@@ -6,6 +6,7 @@ import com.ndroc.rocmovies.entities.Movie;
 import com.ndroc.rocmovies.entities.MovieStyle;
 import com.ndroc.rocmovies.interfaces.*;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,17 +21,17 @@ import java.util.Optional;
 @RequestMapping("borrow")
 public class BorrowController {
 
-    private final BorrowRepository borrowRepository;
-    private final CustomerRepository customerRepository;
-    private final MovieStyleRepository movieStyleRepository;
-    private final MovieRepository movieRepository;
+    @Autowired
+    private BorrowRepository borrowRepository;
 
-    public BorrowController(BorrowRepository borrowRepository, CustomerRepository customerRepository, MovieStyleRepository movieStyleRepository, MovieRepository movieRepository) {
-        this.borrowRepository      = borrowRepository;
-        this.customerRepository    = customerRepository;
-        this.movieStyleRepository  = movieStyleRepository;
-        this.movieRepository       = movieRepository;
-    }
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private MovieStyleRepository movieStyleRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @GetMapping()
     public String getListBorrows(@RequestParam(name = "customer") Optional<Customer> customer, @RequestParam(name = "style") Optional<MovieStyle> style, Model model) {

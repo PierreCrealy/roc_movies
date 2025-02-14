@@ -6,6 +6,7 @@ import com.ndroc.rocmovies.entities.MovieStyle;
 import com.ndroc.rocmovies.interfaces.MovieRepository;
 import com.ndroc.rocmovies.interfaces.MovieStyleRepository;
 import com.ndroc.rocmovies.interfaces.ProductorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -28,15 +29,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("movie")
 public class MovieController {
 
-    private final MovieRepository movieRepository;
-    private final MovieStyleRepository movieStyleRepository;
-    private final ProductorRepository productorRepository;
+    @Autowired
+    private MovieRepository movieRepository;
 
-    public MovieController(MovieRepository movieRepository, MovieStyleRepository movieStyleRepository, ProductorRepository productorRepository) {
-        this.movieRepository      = movieRepository;
-        this.movieStyleRepository = movieStyleRepository;
-        this.productorRepository  = productorRepository;
-    }
+    @Autowired
+    private MovieStyleRepository movieStyleRepository;
+
+    @Autowired
+    private ProductorRepository productorRepository;
+
 
     @GetMapping()
     public String getListMovies(@RequestParam(name = "style") Optional<MovieStyle> movieStyle, Model model)
