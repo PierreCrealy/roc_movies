@@ -3,9 +3,6 @@ package com.ndroc.rocmovies.controllers;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ndroc.rocmovies.entities.Movie;
-import com.ndroc.rocmovies.entities.MovieStyles;
-import com.ndroc.rocmovies.services.MovieService1;
 
 
 @ExtendWith(MockitoExtension.class)

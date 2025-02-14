@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ndroc.rocmovies.entities.Movie;
-import com.ndroc.rocmovies.entities.MovieStyles;
+import com.ndroc.rocmovies.enums.MovieStyles;
 
 @ExtendWith(MockitoExtension.class)
 public class MovieService1Test {

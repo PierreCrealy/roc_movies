@@ -1,29 +1,26 @@
 package com.ndroc.rocmovies.entities;
 
+import com.ndroc.rocmovies.enums.MovieStyles;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+@Entity
+@Table(name="movies")
 public class Movie {
 
-    public Movie(int idMovie, String title, MovieStyles style, int productionYear, String ref, String imageSrc) {
-        this.idMovie = idMovie;
-        this.title = title;
-        this.style = style;
-        this.productionYear = productionYear;
-        this.ref = ref;
-        this.imageSrc = imageSrc;
-    }
-
-    @NotNull
-    private Integer idMovie;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotBlank
     private String title;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private MovieStyles style;
-    
+
     @NotNull
     private Integer productionYear;
 
@@ -33,6 +30,14 @@ public class Movie {
 
     @NotBlank
     private String imageSrc;
+
+    @OneToOne
+    @JoinColumn(name = "productor_id", referencedColumnName = "id")
+    private Productor productor;
+
+    public Movie() {
+    }
+
 
     public String getTitle() {
         return title;
@@ -58,12 +63,12 @@ public class Movie {
         this.productionYear = productionYear;
     }
 
-    public int getIdMovie() {
-        return idMovie;
+    public int getid() {
+        return id;
     }
 
-    public void setIdMovie(int idMovie) {
-        this.idMovie = idMovie;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getRef() {
@@ -81,8 +86,16 @@ public class Movie {
     public void setImageSrc(String imageSrc) {
         this.imageSrc = imageSrc;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", style=" + style +
+                ", productionYear=" + productionYear +
+                ", ref='" + ref + '\'' +
+                ", imageSrc='" + imageSrc + '\'' +
+                '}';
+    }
 }

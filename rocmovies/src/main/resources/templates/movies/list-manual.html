@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RocMovies - Cinéma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for fading in */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hover effect for movie cards */
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Section Header -->
+    <div th:include="fragments/header :: header"></div>
+
+    <!-- Section des films à l'affiche -->
+    <section id="movies" class="py-16 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-yellow-500 mb-10">Films à l'affiche</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+                <div th:each="movietitle : ${moviesTitle}" class="transition-all duration-300 hover:scale-110 py-6 flex flex-col justify-center sm:py-12">
+                    <li th:text="${movietitle}" class="text-lg text-gray-300 mb-6"></li>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Footer -->
+    <div th:include="fragments/footer :: footer"></div>
+
+    <script type="text/javascript" th:src="@{js/script.js}"></script>
+    
+</body>
+</html>
