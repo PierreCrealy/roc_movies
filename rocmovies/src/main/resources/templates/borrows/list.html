@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RocMovies - Cinéma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for fading in */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hover effect for movie cards */
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Section Header -->
+    <div th:include="fragments/header :: header"></div>
+
+    <!-- Section des films à l'affiche -->
+    <section id="movies" class="py-16 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-yellow-500 mb-10">Locations</h2>
+
+            <div class="flex space-x-8 p-8">
+                <div class="w-1/3">
+
+                    <form th:action="@{/borrow}" method="get" class="mb-4">
+
+                        <label for="customer" class="block text-gray-300 text-lg mb-2">Choisissez un client</label>
+                        <select id="customer" name="customer" class="w-50 py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            <option selected="true" disabled="disabled" value="">Clients disponible</option>
+                            <div th:each="customer : ${customers}">
+                                <option th:text="${customer.getName()}" th:value="${customer.getId()}"></option>
+                            </div>
+                        </select>
+
+                        <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            Soumettre
+                        </button>
+                    </form>
+
+                    <form th:action="@{/borrow}" method="get">
+
+                        <label for="style" class="block text-gray-300 text-lg mb-2">Choisissez un style</label>
+                        <select id="style" name="style" class="w-50 py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            <option selected="true" disabled="disabled" value="">Clients disponible</option>
+                            <div th:each="style : ${styles}">
+                                <option th:text="${style.getLabel()}" th:value="${style.getId()}"></option>
+                            </div>
+                        </select>
+
+                        <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                            Soumettre
+                        </button>
+                    </form>
+
+                </div>
+
+                <div class="w-2/3">
+                    <div th:each="borrow : ${borrows}" class="transition-all duration-300 hover:scale-110 py-6 flex flex-col justify-center sm:py-12">
+                        <div th:include="fragments/borrow-card :: borrow-card(borrow=${borrow})"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section Footer -->
+    <div th:include="fragments/footer :: footer"></div>
+
+    <script type="text/javascript" th:src="@{js/script.js}"></script>
+    
+</body>
+</html>

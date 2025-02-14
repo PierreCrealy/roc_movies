@@ -1,15 +1,13 @@
 package com.ndroc.rocmovies.controllers;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.print.Pageable;
 import java.util.Optional;
-
 import com.ndroc.rocmovies.entities.MovieStyle;
 import com.ndroc.rocmovies.interfaces.MovieRepository;
 import com.ndroc.rocmovies.interfaces.MovieStyleRepository;
 import com.ndroc.rocmovies.interfaces.ProductorRepository;
-import com.ndroc.rocmovies.services.MovieServiceManual;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import com.ndroc.rocmovies.entities.Movie;
-import com.ndroc.rocmovies.enums.MovieStyles;
 
 import jakarta.validation.Valid;
 
@@ -42,8 +39,8 @@ public class MovieController {
     }
 
     @GetMapping()
-    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyle> movieStyle, Model model) {
-
+    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyle> movieStyle, Model model)
+    {
         Iterable<Movie> movies = movieRepository.findAll();
 
         if(movieStyle.isPresent()){

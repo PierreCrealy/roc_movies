@@ -1,0 +1,18 @@
+
+<div th:fragment="borrow-card (borrow)">
+
+    <div class="max-w-xs w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <img th:src="${borrow.getMovie().getImageSrc()}" alt="Film Poster" class="w-full h-48 object-cover">
+        <div class="p-4">
+            <h3 th:text="${borrow.getMovie().getTitle()}" class="text-xl font-semibold text-gray-800 mb-2"></h3>
+            <p th:text="${borrow.getCustomer().getName()}" class="text-gray-600 text-sm mb-3"></p>
+            <p th:text="${borrow.getDate()}" class="text-gray-600 text-sm mb-3"></p>
+            <p th:text="${borrow.getStatus()}" class="text-gray-600 text-sm mb-3"></p>
+            <div class="flex items-center justify-between">
+                <span class="text-lg font-semibold text-green-600">€5,99</span>
+                <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">Louer</button>
+            </div>
+        </div>
+    </div>
+
+</div>

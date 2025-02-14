@@ -38,21 +38,23 @@
                 <div class="mb-6">
                 
                     <form th:action="@{/movie}" method="get">
-                        <label for="style" class="block text-gray-300 text-lg mb-2">Choisissez un style</label>
-                        <select id="movie-style" name="style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                        <label for="movie-style" class="block text-gray-300 text-lg mb-2">Choisissez un style</label>
+                        <select id="movie-style" name="movie-style" class="w-25 py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
                             <option selected="true" disabled="disabled" value="">Styles disponible</option>
                             <div th:each="style : ${styles}">
                                 <option th:text="${style.getLabel()}" th:value="${style.getId()}"></option>
                             </div>
                         </select>
                 
-                        <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                        <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
                             Soumettre
                         </button>
                     </form>
 
                 </div>
-                
+
+                <a th:href="@{/movie/adding}" class="hover:text-yellow-300">Ajouter un film</a>
+
             </div>
 
 
