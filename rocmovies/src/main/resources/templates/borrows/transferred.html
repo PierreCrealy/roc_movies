@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RocMovies - Cinéma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animation for fading in */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hover effect for movie cards */
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Section Header -->
+    <div th:include="fragments/header :: header"></div>
+
+    <!-- Section des films à l'affiche -->
+    <section id="movies" class="py-16 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-yellow-500 mb-10">Transfers de locations</h2>
+
+            <div class="flex space-x-8 p-8">
+                <div class="w-1/2">
+
+
+                    <form th:action="@{/borrow/transferred}" method="get" class="mb-4">
+
+                        <div class="flex items-center gap-1">
+                            <div class="flex flex-col">
+                                <select id="customerFrom" name="customerFrom" class="w-50 py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                                    <option selected disabled="disabled" value="">De quel client</option>
+                                    <div th:each="customer : ${customers}">
+                                        <option th:text="${customer.getName()}" th:value="${customer.getId()}"></option>
+                                    </div>
+                                </select>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <select id="customerTo" name="customerTo" class="w-50 py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                                    <option selected disabled="disabled" value="">Vers quel client</option>
+                                    <div th:each="customer : ${customers}">
+                                        <option th:text="${customer.getName()}" th:value="${customer.getId()}"></option>
+                                    </div>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                                Soumettre
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <span th:text="${message}" class="hover:text-yellow-300">message de retour</span>
+
+
+
+                    <script>
+                        let customFrom = document.getElementById('customerFrom');
+                        let customTo = document.getElementById('customerTo');
+
+                        customFrom.addEventListener("change", function(){
+
+                            for (i = 0; i < customTo.length; i++)
+                            {
+                                if (customTo.options[i].value === customFrom.value)
+                                {
+                                    customTo.options[i].disabled = true;
+                                }else{
+                                    customTo.options[i].disabled = false;
+                                }
+                            }
+                        });
+
+                    </script>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section Footer -->
+    <div th:include="fragments/footer :: footer"></div>
+
+    <script type="text/javascript" th:src="@{js/script.js}"></script>
+    
+</body>
+</html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ndroc.rocmovies.interfaces.MovieRepository;
 import com.ndroc.rocmovies.interfaces.MovieStyleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +20,12 @@ public class HomeController {
     @Value("${spring.profiles.active}")
     private String profile;
 
-    private final MovieRepository movieRepository;
-    private final MovieStyleRepository movieStyleRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private MovieStyleRepository movieStyleRepository;
 
-    public HomeController(MovieRepository movieRepository, MovieStyleRepository movieStyleRepository) {
 
-        this.movieRepository = movieRepository;
-        this.movieStyleRepository = movieStyleRepository;
-    }
-    
     @RequestMapping(value={"", "/", "home"})
     public String displayHomePage(Model model) {
 

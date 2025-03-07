@@ -1,12 +1,13 @@
 package com.ndroc.rocmovies.controllers;
 
-import java.awt.print.Pageable;
 import java.util.Optional;
 import com.ndroc.rocmovies.entities.MovieStyle;
 import com.ndroc.rocmovies.interfaces.MovieRepository;
 import com.ndroc.rocmovies.interfaces.MovieStyleRepository;
 import com.ndroc.rocmovies.interfaces.ProductorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -28,20 +29,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("movie")
 public class MovieController {
 
-    private final MovieRepository movieRepository;
-    private final MovieStyleRepository movieStyleRepository;
-    private final ProductorRepository productorRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private MovieStyleRepository movieStyleRepository;
+    @Autowired
+    private ProductorRepository productorRepository;
 
-    public MovieController(MovieRepository movieRepository, MovieStyleRepository movieStyleRepository, ProductorRepository productorRepository) {
-        this.movieRepository      = movieRepository;
-        this.movieStyleRepository = movieStyleRepository;
-        this.productorRepository  = productorRepository;
-    }
 
     @GetMapping()
-    public String getListMovies(@RequestParam(name = "style") Optional<MovieStyle> movieStyle, Model model)
+    public String getListMovies(
+            @RequestParam(name = "style") Optional<MovieStyle> movieStyle,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "2") int size,
+            @RequestParam(name = "sort", defaultValue = "id") String sort,
+            Model model
+    )
     {
-        Iterable<Movie> movies = movieRepository.findAll();
+        Pageable pageable = PageRequest.of(page,size, Sort.by(sort));
+        Iterable<Movie> movies = movieRepository.findAll(pageable);
 
         if(movieStyle.isPresent()){
             movies = movieRepository.findMoviesByStyle(movieStyle.get());
