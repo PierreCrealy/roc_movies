@@ -49,10 +49,10 @@
                             <form th:action="@{/movie}" th:object="${movie}" method="post">
 
                                 <label for="title" class="block text-gray-300 text-lg mt-4 mb-2">Titre du Film</label>
-                                <input type="text" id="title" name="title" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <input type="text" id="title" name="title" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                         
                                 <label for="style" class="block text-gray-300 text-lg mt-4 mb-2">Choisissez un style</label>
-                                <select id="style" name="style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <select id="style" name="style" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                                     <option selected="true" disabled="disabled" value="">Styles disponibles</option>
                                     <div th:each="style : ${styles}">
                                         <option th:text="${style.getLabel()}" th:value="${style.getId()}"></option>
@@ -60,16 +60,16 @@
                                 </select>
                         
                                 <label for="productionYear" class="block text-gray-300 text-lg mt-4 mb-2">Année de production</label>
-                                <input type="number" id="productionYear" name="productionYear" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <input type="number" id="productionYear" name="productionYear" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                         
                                 <label for="ref" class="block text-gray-300 text-lg mt-4 mb-2">Référence du Film</label>
-                                <input type="text" id="ref" name="ref" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <input type="text" id="ref" name="ref" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                         
                                 <label for="imageSrc" class="block text-gray-300 text-lg mt-4 mb-2">URL de l'Image</label>
-                                <input type="text" id="imageSrc" name="imageSrc" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <input type="text" id="imageSrc" name="imageSrc" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
 
                                 <label for="productor" class="block text-gray-300 text-lg mt-4 mb-2">Choisissez un producteur</label>
-                                <select id="productor" name="productor" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
+                                <select id="productor" name="productor" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" required>
                                     <option selected="true" disabled="disabled" value="">Producteurs disponibles</option>
                                     <div th:each="productor : ${productors}">
                                         <option th:text="${productor.getName()}" th:value="${productor.getId()}"></option>
@@ -77,7 +77,7 @@
                                 </select>
 
                                 <!-- Bouton de soumission -->
-                                <button type="submit" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all mt-6">
+                                <button type="submit" class="w-full py-3 px-4 bg-gray-800 text-yellow-500 border-2 border-gray-600 rounded-sm text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all mt-6">
                                     Ajouter le Film
                                 </button>
                             </form>

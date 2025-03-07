@@ -19,7 +19,7 @@ public class MovieService {
     private BorrowRepository borrowRepository;
 
     @Transactional
-    public boolean transferedMoviesToAnotherCustomer(Customer customerFrom, Customer customerTo)
+    public boolean transferedBorrowsToAnotherCustomer(Customer customerFrom, Customer customerTo)
     {
         Random random = new Random();
         List<Borrow> borrows = borrowRepository.findAllByCustomer(customerFrom);

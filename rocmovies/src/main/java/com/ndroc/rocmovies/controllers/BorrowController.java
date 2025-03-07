@@ -80,7 +80,7 @@ public class BorrowController {
         var message = "";
 
         try{
-            movieService.transferedMoviesToAnotherCustomer(customerFrom, customerTo);
+            movieService.transferedBorrowsToAnotherCustomer(customerFrom, customerTo);
             message = "Le transfert s'est bien passé.";
         }catch(Exception e){
             message = "Une erreur est survenue : " + e.getMessage();
